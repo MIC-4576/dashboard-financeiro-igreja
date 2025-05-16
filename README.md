@@ -1,3 +1,10 @@
+<p align="center">
+  <a href="https://mic-4576.github.io/dashboard-financeiro-igreja/" target="_blank">
+    <img src="https://img.shields.io/badge/Acessar%20Dashboard-Online-green?style=for-the-badge&logo=google-chrome" alt="Acessar Dashboard" />
+  </a>
+</p>
+
+
 # Dashboard Financeiro Igreja
 
 Este repositório contém o dashboard financeiro e o relatório da Igreja Evangélica Assembleia de Deus Campo Deus Proverá.
@@ -20,11 +27,11 @@ Este repositório contém o dashboard financeiro e o relatório da Igreja Evang�
 - CSS3  
 - JavaScript (Chart.js)  
 
-## Contato do desenvolvedor
+## Contato
 
 MIC - Michele Interações e Criações  
-E-mail: micheleoliveira4576@gmail.com  
-Telefone: (91) 98253-7776  
+E-mail: seuemail@exemplo.com  
+Telefone: (xx) xxxx-xxxx  
 
 ---
 
