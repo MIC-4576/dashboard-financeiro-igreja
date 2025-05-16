@@ -20,11 +20,11 @@ Este repositório contém o dashboard financeiro e o relatório da Igreja Evang�
 - CSS3  
 - JavaScript (Chart.js)  
 
-## Contato
+## Contato do desenvolvedor
 
 MIC - Michele Interações e Criações  
-E-mail: seuemail@exemplo.com  
-Telefone: (xx) xxxx-xxxx  
+E-mail: micheleoliveira4576@gmail.com  
+Telefone: (91) 98253-7776  
 
 ---
 
