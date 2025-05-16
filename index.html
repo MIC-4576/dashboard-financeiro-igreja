@@ -11,6 +11,9 @@
       margin: 2rem;
       background-color: #f5f5f5;
       color: #333;
+      position: relative;
+      min-height: 100vh;
+      padding-bottom: 80px; /* espaço para rodapé */
     }
     header {
       text-align: center;
@@ -28,19 +31,30 @@
     footer {
       text-align: center;
       margin-top: 3rem;
-    }
-    footer p {
-      margin: 0;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    footer small {
-      font-size: 0.85rem;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
       color: #666;
+    }
+    footer .marca {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    footer .versao {
+      font-weight: bold;
+      color: #333;
     }
     footer img {
       height: 40px;
-      margin-top: 0.5rem;
       opacity: 0.7;
     }
     .chart-container {
@@ -74,6 +88,26 @@
       padding: 0.5rem;
       margin: 0.3rem;
       font-size: 1rem;
+    }
+
+    /* Botão voltar ao topo */
+    #btnTopo {
+      position: fixed;
+      bottom: 80px;
+      right: 30px;
+      z-index: 1000;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #btnTopo:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -161,10 +195,14 @@
 </div>
 
 <footer>
-  <p>MIC - Michele Interações e Criações</p>
-  <small>Soluções digitais personalizadas e interativas</small><br />
-  <img src="logo-mic12.png" alt="Logo MIC" />
+  <div class="marca">
+    <strong>MIC - Michele Interações e Criações</strong>
+    <img src="logo-mic12.png" alt="Logo MIC" />
+  </div>
+  <div class="versao">v1.0</div>
 </footer>
+
+<button id="btnTopo" title="Voltar ao topo">&#8679;</button>
 
 <script>
   const entradas = [29650.95, 24885.90, 37600.61];
@@ -256,6 +294,11 @@
   }
 
   window.onload = () => criarGrafico('pie');
+
+  // Função para scroll suave ao topo
+  document.getElementById('btnTopo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>
