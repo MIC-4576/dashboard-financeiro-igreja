@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Financeiro - Igreja Deus Proverá</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 1rem;
+    }
+    header img {
+      height: 150px;
+      margin-bottom: 0.3rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    footer p {
+      margin: 0;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    footer small {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    footer img {
+      height: 40px;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    canvas {
+      width: 100% !important;
+      height: 400px !important;
+    }
+    .nota {
+      max-width: 900px;
+      margin: 1rem auto;
+      background: #fff3cd;
+      padding: 1rem;
+      border-left: 5px solid #ffc107;
+      border-radius: 5px;
+    }
+    .controls {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    select, button {
+      padding: 0.5rem;
+      margin: 0.3rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logo-raboni.png" alt="Raboni Contabilidade" />
+  <h1>Raboni Contabilidade</h1>
+</header>
+
+<div class="chart-container">
+  <h2 style="text-align:center; margin-bottom: 1rem; font-size: 1.5rem;">
+    Análise Financeira da Igreja Evangélica Assembleia de Deus Campo Deus Proverá
+  </h2>
+  <p><strong>Movimento Anual</strong></p>
+  <p><strong>Ano de 2024:</strong><br />
+  O "RELATORIO ANUAL2025.pdf" na verdade se refere ao período de 01/01/2024 a 31/12/2024.<br />
+  • Crédito (Entradas): Oferta normal de culto: R$ 325.622,48<br />
+  • Débito (Saídas/Despesas): DESPESAS INTERNAS DA IGREJA: R$ 15.433,65; PAGAMENTO: R$ 213.846,62<br />
+  • Saldo: Oferta normal de culto: R$ 310.188,83; PAGAMENTO: R$ 96.342,21; DESPESAS INTERNAS DA IGREJA: -R$ 15.433,65<br />
+  Uma despesa interna específica de 2024 foi registrada em 30/01/2024 no valor de R$ 15.433,65.</p>
+
+  <p><strong>Ano de 2025 (Janeiro a Março):</strong><br />
+  • Entradas:<br />
+  Janeiro: R$ 28.001,25<br />
+  Fevereiro: R$ 25.029,35<br />
+  Março: R$ 25.381,86<br />
+  • Saídas:<br />
+  Janeiro: R$ 35.768,29<br />
+  Fevereiro: R$ 26.715,20<br />
+  Março: R$ 32.586,58</p>
+
+  <p><strong>Entradas detalhadas:</strong><br />
+  Janeiro: Congregação Aliança, Contribuição 40%, Cultos, Dízimos, Oferta E.B.D, aluguel.<br />
+  Fevereiro: Congregação Aliança, Contribuição 40%, Cultos, Oferta E.B.D.<br />
+  Março: Contribuição 40%, Cultos, Dízimos, Grupo Padrão, Oferta E.B.D, Doações.</p>
+
+  <p><strong>Saídas detalhadas:</strong><br />
+  Incluem: pagamentos percentuais, dirigentes, ajuda a irmãos, materiais de construção, internet, energia, contabilidade, despesas internas (cantina/refeitório), móveis, lanche de classe vencedora, dízimos pagos à igreja matriz, serviços prestados etc.</p>
+
+  <p><strong>Despesas por categoria:</strong><br />
+  - Administrativas: R$ 2.200,00<br />
+  - Internas da igreja: R$ 20.870,65<br />
+  - Manutenção e reparos: R$ 9.741,25<br />
+  - Dízimos pagos: R$ 48.307,59<br />
+  - Utilidades/serviços: R$ 3.993,94</p>
+</div>
+
+<div class="chart-container">
+  <h3>Entradas e Saídas Mensais (2025)</h3>
+  <canvas id="fluxoMensal"></canvas>
+</div>
+
+<div class="chart-container">
+  <h3>Saldo Mensal Acumulado (2025)</h3>
+  <canvas id="saldoMensal"></canvas>
+</div>
+
+<div class="chart-container">
+  <h3>Comparativo Anual: 2024 x 2025 (1º Trim)</h3>
+  <canvas id="comparativoAnual"></canvas>
+</div>
+
+<div class="chart-container">
+  <h3>Dízimos Pagos (2025)</h3>
+  <canvas id="graficoDizimos"></canvas>
+</div>
+
+<div class="chart-container">
+  <h3>Despesas por Categoria (2025)</h3>
+  <div class="controls">
+    <label for="tipoGrafico">Tipo de Gráfico:</label>
+    <button onclick="atualizarGrafico('pie')">Pizza</button>
+    <button onclick="atualizarGrafico('bar')">Barra</button>
+  </div>
+  <canvas id="categoriasDespesas"></canvas>
+</div>
+
+<div class="nota">
+  <strong>Nota:</strong> Os valores lançados como "PAG. DÍZIMOS" representam o repasse da igreja do Acará para a igreja matriz (instituição maior).
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <a href="Relatorio_Financeiro_2025.pdf" download>📥 Baixar Relatório Financeiro 2025 (PDF)</a>
+</div>
+
+<footer>
+  <p>MIC - Michele Interações e Criações</p>
+  <small>Soluções digitais personalizadas e interativas</small><br />
+  <img src="logo-mic12.png" alt="Logo MIC" />
+</footer>
+
+<script>
+  const entradas = [29650.95, 24885.90, 37600.61];
+  const saidas = [37717.99, 26571.75, 35302.42];
+  const saldo = entradas.map((v, i) => v - saidas[i]);
+  const saldoAcumulado = saldo.reduce((acc, val, idx) => {
+    if (idx === 0) acc.push(val);
+    else acc.push(acc[idx - 1] + val);
+    return acc;
+  }, []);
+
+  const chartOptions = {
+    responsive: true,
+    animation: {
+      duration: 1000,
+      easing: 'easeOutQuart'
+    },
+    plugins: {
+      legend: { position: 'top' },
+      title: { display: true }
+    }
+  };
+
+  new Chart(document.getElementById('fluxoMensal'), {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar'],
+      datasets: [
+        { label: 'Entradas (R$)', data: entradas, borderColor: 'green', fill: false, tension: 0.3 },
+        { label: 'Saídas (R$)', data: saidas, borderColor: 'red', fill: false, tension: 0.3 }
+      ]
+    },
+    options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { text: 'Fluxo Mensal de Caixa - 2025' } } }
+  });
+
+  new Chart(document.getElementById('saldoMensal'), {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar'],
+      datasets: [
+        { label: 'Saldo Acumulado (R$)', data: saldoAcumulado, borderColor: 'blue', fill: true, backgroundColor: 'rgba(0, 123, 255, 0.1)', tension: 0.3 }
+      ]
+    },
+    options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { text: 'Saldo Mensal Acumulado - 2025' } } }
+  });
+
+  new Chart(document.getElementById('comparativoAnual'), {
+    type: 'bar',
+    data: {
+      labels: ['Entradas', 'Saídas'],
+      datasets: [
+        { label: '2024 (Ano Todo)', data: [325622.48, 229280.27], backgroundColor: 'rgba(0, 123, 255, 0.5)' },
+        { label: '2025 (Jan-Mar)', data: [92137.46, 99600.16], backgroundColor: 'rgba(255, 99, 132, 0.5)' }
+      ]
+    },
+    options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { text: 'Comparativo Anual - 2024 vs 2025 (1º Trim)' } } }
+  });
+
+  new Chart(document.getElementById('graficoDizimos'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar'],
+      datasets: [{ label: 'Dízimos Pagos (R$)', data: [17125.65, 15238.70, 15943.24], backgroundColor: '#007bff' }]
+    },
+    options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { text: 'Dízimos Repassados à Igreja Matriz - 2025' } } }
+  });
+
+  let graficoCategorias;
+  const ctxCat = document.getElementById('categoriasDespesas');
+  const dadosCategorias = {
+    labels: ['Manutenção e Reparos', 'Despesa Cantina', 'Despesas Internas', 'Contabilidade', 'Outras'],
+    datasets: [{
+      data: [9741.25, 9682.95, 5437.00, 1600.00, 6800.96],
+      backgroundColor: ['#17a2b8', '#ffc107', '#6f42c1', '#dc3545', '#20c997']
+    }]
+  };
+
+  function criarGrafico(tipo) {
+    if (graficoCategorias) graficoCategorias.destroy();
+    graficoCategorias = new Chart(ctxCat, {
+      type: tipo,
+      data: dadosCategorias,
+      options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { text: 'Despesas por Categoria - Jan a Mar/2025' } } }
+    });
+  }
+
+  function atualizarGrafico(tipo) {
+    criarGrafico(tipo);
+  }
+
+  window.onload = () => criarGrafico('pie');
+</script>
+</body>
+</html>
